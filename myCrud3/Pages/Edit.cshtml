@@ -1,0 +1,22 @@
+﻿@page "{id:int}"
+@model myCrud3.Pages.EditModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit Customer - @Model.Customer.Id</h2>
+
+<form method="post">
+    <div asp-validation-summary="ModelOnly"></div>
+        <input asp-for="Customer.Id" type="hidden" />
+        <div class="form-group">
+            <label asp-for="Customer.Name">Name:</label><br />
+            <input asp-for="Customer.Name" class="input-lg" /><br />
+            <span asp-validation-for="Customer.Name" class="text-danger"></span><br />
+            <label asp-for="Customer.EmailAddress">Email Address:</label><br />
+            <input asp-for="Customer.EmailAddress" class="input-lg" />
+        </div>
+        <div><button type="submit" class="btn btn-success">Save</button>
+             <button type="submit" class="btn btn-danger" asp-page-handler="Cancel">Cancel</button>
+        </div>
+</form>

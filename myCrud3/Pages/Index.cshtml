@@ -1,0 +1,49 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<h1>Add a list of Names!</h1>
+<form method="post">
+    @*Checks if it's a good message or a bad message *@
+    @if (Model.Success)
+    {
+    <h4 class="text-center text-success">@Model.Message</h4>
+    } 
+    else {
+    <h4 class="text-center text-danger">@Model.Message</h4>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th><a asp-page="./Index" asp-route-sort="id">ID</a></th>
+                <th><a asp-page="./Index" asp-route-sort="name">Name</a></th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @* Creating a for loop here *@
+            @foreach (var customer in Model.Customers)
+            {
+            <tr>
+                <td>@customer.Id</td>
+                <td>@customer.Name</td>
+                <td>@customer.EmailAddress</td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@customer.Id" class="btn btn-success">Edit</a>
+                    <button type="submit" asp-page-handler="Delete" asp-route-id="@customer.Id" class="btn-sm btn-danger">Delete</button>
+                </td>
+            </tr>
+            }
+        </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4"><button asp-page="./Create" class="btn btn-primary">Add Name</button></td>
+                </tr>
+            </tfoot>
+
+        
+    </table>
+</form>
